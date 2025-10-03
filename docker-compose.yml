@@ -7,6 +7,5 @@ services:
             MSSQL_DB: ${DB_NAME}
         volumes:
             - ./sqlserver:/var/opt/mssql/data
-            - ./init-scripts:/docker-entrypoint-initdb.d
         ports:
             - 1434:1433
