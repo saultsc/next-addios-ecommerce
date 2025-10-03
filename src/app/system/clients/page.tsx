@@ -1,4 +1,6 @@
-export const metadata = {
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
 	title: 'Clientes',
 	description: 'Maneja tus clientes',
 };

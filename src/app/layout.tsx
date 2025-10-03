@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: {
 		default: 'Addios',
 		template: 'Addios | %s',
