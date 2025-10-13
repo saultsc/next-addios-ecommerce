@@ -1,7 +1,12 @@
-export default function ShopLayout({ children }: { children: React.ReactNode }) {
+import { Sidebar, TopMenu } from '@/components';
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<main>
-			<section>{children}</section>
+		<main className="min-h-screen">
+			<TopMenu />
+			<Sidebar />
+
+			<div className="px-0 sm:px-10">{children}</div>
 		</main>
 	);
 }

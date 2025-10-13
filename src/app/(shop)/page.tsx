@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { ProductGrid, Title } from '@/components';
+import { initialData } from '@/seed/seed';
 
-export const metadata: Metadata = {
-	title: 'Inico',
-	description: 'Welcome to our shop',
-};
+const products = initialData.products;
 
-export default function ShopPage() {
+export default function HomePage() {
 	return (
-		<div className="">
-			<h1>Bienvenidos al himalalla</h1>
-		</div>
+		<>
+			<Title title="Catalogo" subTitle="Todos los productos" clssName="mb-2" />
+
+			<ProductGrid products={products} />
+		</>
 	);
 }
