@@ -4,7 +4,10 @@ import './globals.css';
 import { titleFonts } from '@/config/fonts';
 
 export const metadata: Metadata = {
-	title: 'Abibas | Tienda virtual',
+	title: {
+		default: 'Abibas | Tienda virtual',
+		template: 'Abibas | %s',
+	},
 	description: 'Tienda virtual de productos',
 };
 
