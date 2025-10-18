@@ -4,14 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Product } from '@/interfaces';
+import { SeedProduct } from '@/seed/seed';
 import { useState } from 'react';
 
 interface Props {
-	product: Product;
+	product: Product | SeedProduct;
 }
 
 export const ProductGridItem = ({ product }: Props) => {
-	const [displayImage, setDisplayImage] = useState(product.images[0]);
+	const [displayImage, setDisplayImage] = useState(product.productImage[0]);
 
 	return (
 		<div className="rounded-md overflow-hidden fade-in">
@@ -22,8 +23,8 @@ export const ProductGridItem = ({ product }: Props) => {
 					width={500}
 					height={500}
 					className="w-full object-cover"
-					onMouseEnter={() => setDisplayImage(product.images[1])}
-					onMouseLeave={() => setDisplayImage(product.images[0])}
+					onMouseEnter={() => setDisplayImage(product.productImage[1])}
+					onMouseLeave={() => setDisplayImage(product.productImage[0])}
 				/>
 			</Link>
 

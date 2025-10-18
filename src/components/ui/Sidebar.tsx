@@ -1,7 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import clsx from 'clsx';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import {
 	IoCloseOutline,
@@ -15,10 +16,33 @@ import {
 } from 'react-icons/io5';
 
 import { useUiStore } from '@/store';
+import { isAdminRoute } from '@/utils';
+import { CiShoppingBasket } from 'react-icons/ci';
+
+interface MenuItem {
+	href: string;
+	icon: React.ElementType;
+	label: string;
+}
+
+const adminMenuItems: MenuItem[] = [
+	{ href: '/system/products', icon: IoShirtOutline, label: 'Productos' },
+	{ href: '/system/orders', icon: IoTicketOutline, label: 'Ordenes' },
+	{ href: '/system/users', icon: IoPeopleOutline, label: 'Usuarios' },
+];
+
+const userMenuItems: MenuItem[] = [
+	{ href: '/profile', icon: IoPersonOutline, label: 'Perfil' },
+	{ href: '/orders', icon: IoTicketOutline, label: 'Ordenes' },
+	{ href: '/auth/login', icon: IoLogInOutline, label: 'Ingresar' },
+	{ href: '/', icon: IoLogOutOutline, label: 'Salir' },
+];
 
 export const Sidebar = () => {
 	const isSideMenuOpen = useUiStore((state) => state.isSideMenuOpen);
 	const closeMenu = useUiStore((state) => state.closeSideMenu);
+
+	const pathname = usePathname();
 
 	return (
 		<div>
@@ -42,8 +66,7 @@ export const Sidebar = () => {
 					{
 						'translate-x-full': !isSideMenuOpen,
 					}
-				)}
-			>
+				)}>
 				<IoCloseOutline
 					size={50}
 					className="absolute top-5 right-5 cursor-pointer"
@@ -60,65 +83,58 @@ export const Sidebar = () => {
 					/>
 				</div>
 
-				{/* Menu */}
-				<Link
-					href={'/'}
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoPersonOutline size={25} />
-					<span className="ml-3 text-xl">Perfil</span>
-				</Link>
-
-				<Link
-					href={'/'}
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoTicketOutline size={25} />
-					<span className="ml-3 text-xl">Ordenes</span>
-				</Link>
-
-				<Link
-					href={'/'}
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoLogInOutline size={25} />
-					<span className="ml-3 text-xl">Igresar</span>
-				</Link>
-
-				<Link
-					href={'/'}
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoLogOutOutline size={25} />
-					<span className="ml-3 text-xl">Salir</span>
-				</Link>
+				{/* User Menu */}
+				{isAdminRoute(pathname) ? (
+					<Link
+						href="/"
+						onClick={() => closeMenu()}
+						className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all">
+						<CiShoppingBasket size={25} />
+						<span className="ml-3 text-xl">Catalogo</span>
+					</Link>
+				) : (
+					userMenuItems.map((item) => {
+						const Icon = item.icon;
+						return (
+							<Link
+								key={item.href}
+								href={item.href}
+								onClick={() => closeMenu()}
+								className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all">
+								<Icon size={25} />
+								<span className="ml-3 text-xl">{item.label}</span>
+							</Link>
+						);
+					})
+				)}
 
 				{/* Line Separator */}
 				<div className="w-full h-px bg-gray-200 my-10" />
 
-				<Link
-					href={'/'}
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoShirtOutline size={25} />
-					<span className="ml-3 text-xl">Productos</span>
-				</Link>
-
-				<Link
-					href={'/'}
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoTicketOutline size={25} />
-					<span className="ml-3 text-xl">Ordenes</span>
-				</Link>
-
-				<Link
-					href={'/'}
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoPeopleOutline size={25} />
-					<span className="ml-3 text-xl">Usuarios</span>
-				</Link>
+				{/* Admin Menu */}
+				{isAdminRoute(pathname) ? (
+					adminMenuItems.map((item) => {
+						const Icon = item.icon;
+						return (
+							<Link
+								key={item.href}
+								href={item.href}
+								onClick={() => closeMenu()}
+								className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all">
+								<Icon size={25} />
+								<span className="ml-3 text-xl">{item.label}</span>
+							</Link>
+						);
+					})
+				) : (
+					<Link
+						href="/system/dashboard"
+						onClick={() => closeMenu()}
+						className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all">
+						<IoPeopleOutline size={25} />
+						<span className="ml-3 text-xl">Administrador</span>
+					</Link>
+				)}
 			</nav>
 		</div>
 	);

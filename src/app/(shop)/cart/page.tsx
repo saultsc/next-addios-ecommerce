@@ -24,7 +24,7 @@ export default function () {
 						{productsInCart.map((product) => (
 							<div key={product.slug} className="flex mb-5">
 								<Image
-									src={`/products/${product.images[0]}`}
+									src={`/products/${product.productImage[0]}`}
 									alt={`Foto del producto ${product.title}`}
 									width={100}
 									height={100}
@@ -67,8 +67,7 @@ export default function () {
 						<div className="mt-5 mb-2 w-full">
 							<Link
 								className="flex btn-primary justify-center"
-								href={`/checkout/address`}
-							>
+								href={`/checkout/address`}>
 								Checkout
 							</Link>
 						</div>

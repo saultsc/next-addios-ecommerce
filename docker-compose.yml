@@ -8,4 +8,4 @@ services:
         volumes:
             - ./sqlserver:/var/opt/mssql/data
         ports:
-            - 1434:1433
+            - 1433:1433

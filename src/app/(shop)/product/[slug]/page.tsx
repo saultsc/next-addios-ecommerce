@@ -28,7 +28,7 @@ export default async function ({ params }: Props) {
 		<div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
 			{/* Mobile Slideshow */}
 			<ProductMobileSlideShow
-				images={product.images}
+				images={product.productImage}
 				title={product.title}
 				className="block md:hidden"
 			/>
@@ -36,7 +36,7 @@ export default async function ({ params }: Props) {
 			{/* Desktop Slideshow */}
 			<div className="col-span-2 md:col-span-2">
 				<ProductSlideShow
-					images={product.images}
+					images={product.productImage}
 					title={product.title}
 					className="hidden md:block"
 				/>

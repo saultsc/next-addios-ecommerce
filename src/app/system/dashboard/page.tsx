@@ -1,3 +1,5 @@
+import { Title } from '@/components';
+
 export const metadata = {
 	title: 'Dashboard',
 	description: 'Dashboard for system administrators',
@@ -5,8 +7,8 @@ export const metadata = {
 
 export default function () {
 	return (
-		<div>
-			<h1>Dashboard</h1>
-		</div>
+		<>
+			<Title title="Dashboard" clssName="mb-2" />
+		</>
 	);
 }
