@@ -29,9 +29,9 @@ export default async function OrdersPage({ searchParams }: Props) {
 		{
 			header: 'Imagen',
 			cell: (p: Product) => (
-				<Link href={`/product/${p.slug}`}>
+				<Link href={`products/${p.slug}`}>
 					<ProductImage
-						src={p.productImage[0]?.url}
+						src={p.productImage[0]?.url || ''}
 						width={80}
 						height={80}
 						alt={p.title}
@@ -43,7 +43,7 @@ export default async function OrdersPage({ searchParams }: Props) {
 		{
 			header: 'Titulo',
 			cell: (p: Product) => (
-				<Link href={`/admin/product/${p.slug}`} className="hover:underline">
+				<Link href={`products/${p.slug}`} className="hover:underline">
 					{p.title}
 				</Link>
 			),
@@ -71,7 +71,7 @@ export default async function OrdersPage({ searchParams }: Props) {
 			<Title title="Productos" />
 
 			<div className="flex justify-end mb-5">
-				<Link href="/admin/product/new" className="btn-primary">
+				<Link href="products/new" className="btn-primary">
 					Nuevo producto
 				</Link>
 			</div>
